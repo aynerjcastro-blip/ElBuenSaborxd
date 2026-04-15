@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.restauranteelbuensabor;
+package com.mycompany.restauranteelbuensabor.controller;
 
+import com.mycompany.restauranteelbuensabor.view.Imprimir;
+import com.mycompany.restauranteelbuensabor.model.Datos;
+import com.mycompany.restauranteelbuensabor.service.Proceso;
+import com.mycompany.restauranteelbuensabor.service.Utilidades;
 import java.util.Scanner;
 
 /**

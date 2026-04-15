@@ -2,12 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.restauranteelbuensabor;
+package com.mycompany.restauranteelbuensabor.view;
 
-/**
- *
- * @author alfre
- */
+import com.mycompany.restauranteelbuensabor.model.Datos;
 public class Imprimir {
 public static void mostrarCarta(){
 System.out.println("========================================");

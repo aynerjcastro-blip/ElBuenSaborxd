@@ -2,12 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.restauranteelbuensabor;
+package com.mycompany.restauranteelbuensabor.service;
 
-/**
- *
- * @author alfre
- */
+import com.mycompany.restauranteelbuensabor.model.Datos;
 public class Proceso {
 public static double hacerTodo(){
 double sub=0;double iva=0;double tot=0;double aux=0;int cont=0;int i=0;

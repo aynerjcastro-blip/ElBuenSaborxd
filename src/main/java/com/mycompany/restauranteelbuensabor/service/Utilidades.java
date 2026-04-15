@@ -2,12 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.restauranteelbuensabor;
+package com.mycompany.restauranteelbuensabor.service;
 
-/**
- *
- * @author alfre
- */
+import com.mycompany.restauranteelbuensabor.model.Datos;
 public class Utilidades {
 public static double calcular(double pr,double cn,double dc,double iv,double pp,int ni,boolean ap){
 double res=0;double tmp=0;double aux2=0;
