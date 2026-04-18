@@ -15,18 +15,18 @@ public class RestauranteElBuenSabor {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
-        boolean flag = true;
+        boolean continuarEjecutando = true;
         int contador = 0;
         String aux = "";
         int tmp = 0;
-        double numeroMesa = 0;
+        double numeroMesa = 0;  
         boolean continuar = true;
         System.out.println("========================================");
         System.out.println("    RESTAURANTE EL BUEN SABOR");
         System.out.println("    Calle 15 #8-32, Valledupar");
         System.out.println("    NIT: 900.123.456-7");
         System.out.println("========================================");
-        while (flag) {
+        while (continuarEjecutando) {
             System.out.println("1. Ver carta");
             System.out.println("2. Agregar producto al pedido");
             System.out.println("3. Ver pedido actual");
@@ -92,7 +92,7 @@ public class RestauranteElBuenSabor {
             } else if (opcion == 3) {
                 // ver pedido actual
                 System.out.println();
-                if (Utilidades.validar()) {
+                if (Utilidades.hayProductosEnPedido()) {
                     Imprimir.mostrarPedido();
                 } else {
                     System.out.println("No hay productos en el pedido actual.");
@@ -103,10 +103,10 @@ public class RestauranteElBuenSabor {
             } else if (opcion == 4) {
                 // generar factura
                 System.out.println();
-                if (Utilidades.validar()) {
+                if (Utilidades.hayProductosEnPedido()) {
                     double r = 0;
                     // procesar pedido y generar total
-                    r = CalculadorFactura.y();
+                    r = CalculadorFactura.calcularTotalFactura();
                     tmp = (int) r;
                     aux = "Total calculado: $" + tmp;
                     numeroMesa = r;
@@ -137,7 +137,7 @@ public class RestauranteElBuenSabor {
                 System.out.println();
             } else if (opcion == 0) {
                 // salir
-                flag = false;
+                continuarEjecutando = false;
                 System.out.println("Hasta luego!");
             } else {
                 // opcioncion no reconocida
