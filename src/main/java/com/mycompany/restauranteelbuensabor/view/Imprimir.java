@@ -13,8 +13,8 @@ public class Imprimir {
         System.out.println("    --- NUESTRA CARTA ---");
         System.out.println("========================================");
         int i = 0;
-        while (i < Datos.nombres.length) {
-            System.out.printf("%d. %-22s $%,.0f%n", (i + 1), Datos.nombres[i], Datos.precios[i]);
+        while (i < Datos.nom.length) {
+            System.out.printf("%d. %-22s $%,.0f%n", (i + 1), Datos.nom[i], Datos.p[i]);
             i++;
         } // fin while
         System.out.println("========================================");
@@ -24,12 +24,12 @@ public class Imprimir {
         double sub = 0;
         int i = 0;
         System.out.println("--- PEDIDO ACTUAL ---");
-        while (i < Datos.nombres.length) {
-            if (Datos.cantidades[i] > 0) {
+        while (i < Datos.nom.length) {
+            if (Datos.cant[i] > 0) {
                 // imprime producto con cantidad y subtotal parcial
-                System.out.printf("%-20s x%-6d $%,.0f%n", Datos.nombres[i], Datos.cantidades[i], (Datos.precios[i] * Datos.cantidades[i]));
+                System.out.printf("%-20s x%-6d $%,.0f%n", Datos.nom[i], Datos.cant[i], (Datos.p[i] * Datos.cant[i]));
                 // suma al subtotal
-                sub = sub + Datos.precios[i] * Datos.cantidades[i];
+                sub = sub + Datos.p[i] * Datos.cant[i];
             }
             i++;
         } // fin while
@@ -46,9 +46,9 @@ public class Imprimir {
         double aux = 0;
         // calcula subtotal otra vez
         int i = 0;
-        while (i < Datos.nombres.length) {
-            if (Datos.cantidades[i] > 0) {
-                sub = sub + Datos.precios[i] * Datos.cantidades[i];
+        while (i < Datos.nom.length) {
+            if (Datos.cant[i] > 0) {
+                sub = sub + Datos.p[i] * Datos.cant[i];
                 cont = cont + 1;
             }
             i++;
@@ -78,9 +78,9 @@ public class Imprimir {
         System.out.println("----------------------------------------");
         // imprime cada item del pedido
         int j = 0;
-        while (j < Datos.nombres.length) {
-            if (Datos.cantidades[j] > 0) {
-                System.out.printf("%-20s x%-6d $%,.0f%n", Datos.nombres[j], Datos.cantidades[j], (Datos.precios[j] * Datos.cantidades[j]));
+        while (j < Datos.nom.length) {
+            if (Datos.cant[j] > 0) {
+                System.out.printf("%-20s x%-6d $%,.0f%n", Datos.nom[j], Datos.cant[j], (Datos.p[j] * Datos.cant[j]));
             }
             j++;
         } // fin while
@@ -98,8 +98,8 @@ public class Imprimir {
         System.out.println(sep);
         // actualiza estado e incrementa factura - tres responsabilidades en un metodo
         Datos.nf = Datos.nf + 1;
-        Datos.estado = 0;
-        Datos.total = tot;
+        Datos.est = 0;
+        Datos.tot = tot;
     }
 
     public static void imprimirFacturaResumen() {
@@ -111,9 +111,9 @@ public class Imprimir {
         double aux = 0;
         // calcula subtotal otra vez igual que en imprimirFacturaCompleta
         int i = 0;
-        while (i < Datos.nombres.length) {
-            if (Datos.cantidades[i] > 0) {
-                sub = sub + Datos.precios[i] * Datos.cantidades[i];
+        while (i < Datos.nom.length) {
+            if (Datos.cant[i] > 0) {
+                sub = sub + Datos.p[i] * Datos.cant[i];
                 cont = cont + 1;
             }
             i++;

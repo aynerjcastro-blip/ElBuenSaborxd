@@ -14,18 +14,19 @@ import java.util.Scanner;
 public class RestauranteElBuenSabor {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int opcionMenu = 0;
-        boolean continuarEjecucion = true;
+        int opcion = 0;
+        boolean flag = true;
         int contador = 0;
         String aux = "";
         int tmp = 0;
         double numeroMesa = 0;
+        boolean continuar = true;
         System.out.println("========================================");
         System.out.println("    RESTAURANTE EL BUEN SABOR");
         System.out.println("    Calle 15 #8-32, Valledupar");
         System.out.println("    NIT: 900.123.456-7");
         System.out.println("========================================");
-        while (continuarEjecucion) {
+        while (flag) {
             System.out.println("1. Ver carta");
             System.out.println("2. Agregar producto al pedido");
             System.out.println("3. Ver pedido actual");
@@ -34,12 +35,12 @@ public class RestauranteElBuenSabor {
             System.out.println("0. Salir");
             System.out.println("========================================");
             System.out.print("Seleccione una opcioncion: ");
-            opcionMenu = sc.nextInt();
-            if (opcionMenu == 1) {
+            opcion = sc.nextInt();
+            if (opcion == 1) {
                 // mostrar carta
                 Imprimir.mostrarCarta();
                 System.out.println();
-            } else if (opcionMenu    == 2) {
+            } else if (opcion == 2) {
                 // agregar producto
                 System.out.println("--- AGREGAR PRODUCTO ---");
                 System.out.print("Numero de producto (1-" + Datos.nombres.length + "): ");
@@ -88,7 +89,7 @@ public class RestauranteElBuenSabor {
                     }
                 } // fin if numeroProducto > 0
                 System.out.println();
-            } else if (opcionMenu == 3) {
+            } else if (opcion == 3) {
                 // ver pedido actual
                 System.out.println();
                 if (Utilidades.validar()) {
@@ -96,16 +97,16 @@ public class RestauranteElBuenSabor {
                 } else {
                     System.out.println("No hay productos en el pedido actual.");
                     System.out.println("Use la opcioncion 2 para agregar productos.");
-                 
+                    continuar = true;
                 } // fin if validar
                 System.out.println();
-            } else if (opcionMenu == 4) {
+            } else if (opcion == 4) {
                 // generar factura
                 System.out.println();
                 if (Utilidades.validar()) {
                     double r = 0;
                     // procesar pedido y generar total
-                    r = CalculadorFactura.calcularTotalFactura();
+                    r = CalculadorFactura.y();
                     tmp = (int) r;
                     aux = "Total calculado: $" + tmp;
                     numeroMesa = r;
@@ -120,9 +121,9 @@ public class RestauranteElBuenSabor {
                     tmp = 0;
                     aux = "";
                     numeroMesa = 0;
-                  
+                    continuar = true;
                 } // fin if validar
-            } else if (opcionMenu == 5) {
+            } else if (opcion == 5) {
                 // nueva mesa - reiniciar pedido
                 System.out.println();
                 Utilidades.reiniciar();
@@ -131,12 +132,12 @@ public class RestauranteElBuenSabor {
                 tmp = 0;
                 aux = "";
                 numeroMesa = 0;
-             
+                continuar = true;
                 System.out.println("Mesa reiniciada. Lista para nuevo cliente.");
                 System.out.println();
-            } else if (opcionMenu == 0) {
+            } else if (opcion == 0) {
                 // salir
-                continuarEjecucion = false;
+                flag = false;
                 System.out.println("Hasta luego!");
             } else {
                 // opcioncion no reconocida

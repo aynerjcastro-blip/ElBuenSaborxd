@@ -1,4 +1,4 @@
-/*
+a/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -30,8 +30,8 @@ public class Utilidades {
     public static boolean validar() {
         int cont = 0;
         int i = 0;
-        while (i < Datos.cantidades.length) {
-            if (Datos.cantidades[i] > 0) {
+        while (i < Datos.can.length) {
+            if (Datos.can[i] > 0) {
                 cont = cont + 1;
             }
             i++;
@@ -46,9 +46,9 @@ public class Utilidades {
 
     public static void reiniciar() {
         // metodo antiguo de calculo - pendiente revisar
-        // public static double calcOld(double precio, int cantidades){
+        // public static double calcOld(double precio, int can){
         // double resultado = 0;
-        // resultado = precio * cantidades;
+        // resultado = precio * can;
         // resultado = resultado + (resultado * 0.19);
         // if(resultado > 50000){
         // resultado = resultado + (resultado * 0.10);}
@@ -57,13 +57,13 @@ public class Utilidades {
         // return resultado;}
         // double sub=0;int i=0;
         // while(i<Datos.nom.length){
-        // sub=sub+Datos.p[i]*Datos.cantidades[i];i++;}
+        // sub=sub+Datos.p[i]*Datos.can[i];i++;}
         // if(sub>50000){ sub=sub+(sub*0.19); sub=sub+(sub*0.10); }
         // else{ sub=sub+(sub*0.19); }
         // Datos.tot=sub;
         int i = 0;
-        while (i < Datos.cantidades.length) {
-            Datos.cantidades[i] = 0;
+        while (i < Datos.can.length) {
+            Datos.can[i] = 0;
             i++;
         }
         Datos.total = 0;
