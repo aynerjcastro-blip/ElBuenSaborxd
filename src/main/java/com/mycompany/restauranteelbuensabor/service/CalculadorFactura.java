@@ -7,11 +7,12 @@ import com.mycompany.restauranteelbuensabor.model.ReglasNegocio;
 public class CalculadorFactura {
 
     public static Factura generarFactura(Pedido pedido, int numeroFactura) {
-        double subtotal  = pedido.calcularSubTotal();
+        double subtotal = pedido.calcularSubTotal();
         double descuento = calcularDescuento(subtotal, pedido.contarItemsDiferentes());
-        double iva       = calcularIVA(subtotal - descuento);
-        double total     = calcularTotal((subtotal - descuento) + iva);
-        return new Factura(pedido, numeroFactura, subtotal, descuento, iva, total);
+        double iva = calcularIVA(subtotal - descuento);
+        double total = calcularTotal((subtotal - descuento) + iva);
+        double propina = calcularPropina(total);
+        return new Factura(pedido, numeroFactura, subtotal, descuento, iva, total, propina);
     }
 
     private static double calcularDescuento(double subtotal, int itemsDiferentes) {
@@ -31,5 +32,12 @@ public class CalculadorFactura {
         }
         return base;
     }
-    
+
+    private static double calcularPropina(double base) {
+        if (base > ReglasNegocio.UMBRAL_PROPINA) {
+            return base * ReglasNegocio.TASA_PROPINA;
+        }
+        return 0;
+    }
+
 }
