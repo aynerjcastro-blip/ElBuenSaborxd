@@ -5,6 +5,7 @@
 package com.mycompany.restauranteelbuensabor.view;
 
 import com.mycompany.restauranteelbuensabor.model.Datos;
+import com.mycompany.restauranteelbuensabor.service.CalculadorFactura;
 
 
 public class Imprimir {
@@ -75,5 +76,38 @@ public class Imprimir {
         System.out.printf("%-27s $%,.0f%n", "TOTAL:", total);
         System.out.println(SEPARADOR_DOBLE);
     }
-    
+
+     public static void imprimirFacturaCompleta() {
+        double subtotal             = CalculadorFactura.calcularSubtotal();
+        double subtotalConDescuento = CalculadorFactura.aplicarDescuento(subtotal);
+        double iva                  = CalculadorFactura.calcularIVA(subtotalConDescuento);
+        double total                = CalculadorFactura.calcularPropina(subtotalConDescuento + iva);
+        double propina              = total - (subtotalConDescuento + iva);
+
+        imprimirEncabezado();
+        System.out.printf("FACTURA No. %03d%n", Datos.numeroFacturas);
+        System.out.println(SEPARADOR_SIMPLE);
+        imprimirItemsPedido();
+        imprimirTotales(subtotalConDescuento, iva, propina, total);
+        System.out.println("Gracias por su visita!");
+        System.out.println(NOMBRE_RESTAURANTE + " - Valledupar");
+        System.out.println(SEPARADOR_DOBLE);
+
+        Datos.numeroFacturas++;
+        Datos.estado = 0;
+        Datos.total  = total;
+    }
+
+    public static void imprimirFacturaResumen() {
+        double subtotal             = CalculadorFactura.calcularSubtotal();
+        double subtotalConDescuento = CalculadorFactura.aplicarDescuento(subtotal);
+        double iva                  = CalculadorFactura.calcularIVA(subtotalConDescuento);
+        double total                = CalculadorFactura.calcularPropina(subtotalConDescuento + iva);
+        double propina              = total - (subtotalConDescuento + iva);
+
+        imprimirEncabezado();
+        System.out.printf("FACTURA No. %03d (RESUMEN)%n", Datos.numeroFacturas);
+        System.out.println(SEPARADOR_SIMPLE);
+        imprimirTotales(subtotalConDescuento, iva, propina, total);
+    }
 }
