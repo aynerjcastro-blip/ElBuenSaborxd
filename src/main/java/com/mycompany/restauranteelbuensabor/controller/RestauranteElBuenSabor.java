@@ -47,6 +47,7 @@ public class RestauranteElBuenSabor {
 
                     if (numeroProducto > 0 && numeroProducto <= Carta.getTotalProductos()) {
                         if (cantidad > 0) {
+                            // La mesa se activa una sola vez por pedido, al agregar el primer producto
                             if (!mesa.estaActiva()) {
                                 System.out.print("Ingrese numero de mesa: ");
                                 int numeroMesa = Integer.parseInt(sc.nextLine());
@@ -85,6 +86,8 @@ public class RestauranteElBuenSabor {
                     if (pedido.tieneProductos()) {
                         Factura factura = CalculadorFactura.generarFactura(pedido, numeroFactura);
                         Imprimir.imprimirFacturaCompleta(factura);
+                        // El pedido y la mesa se limpian despues de facturar, no antes,
+                        // para que imprimirFacturaCompleta pueda leer los items
                         numeroFactura++;
                         pedido.limpiar();
                         mesa.reiniciar();
@@ -112,6 +115,7 @@ public class RestauranteElBuenSabor {
                 default:
                     System.out.println("Opcion no valida. Seleccione entre 0 y 5.");
                     intentosInvalidos++;
+                    // Se reinicia el contador para no bloquear al usuario indefinidamente
                     if (intentosInvalidos > 3) {
                         System.out.println("Demasiados intentos invalidos.");
                         intentosInvalidos = 0;
