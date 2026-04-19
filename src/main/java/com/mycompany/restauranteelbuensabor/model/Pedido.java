@@ -8,6 +8,8 @@ public class Pedido {
     private final List<ItemPedido> items = new ArrayList<>();
 
     public void agregarItem(Producto producto, int cantidad) {
+         // Si el producto ya existe en el pedido se acumula la cantidad
+        // en lugar de crear un item duplicado
         for (ItemPedido item : items) {
             if (item.getProducto().equals(producto)) {
                 item.agregarCantidad(cantidad);
@@ -16,6 +18,7 @@ public class Pedido {
         }
         items.add(new ItemPedido(producto, cantidad));
     }
+
 
     public double calcularSubTotal() {
         double total = 0;
@@ -38,6 +41,8 @@ public class Pedido {
     }
 
     public List<ItemPedido> getItems() {
+        // Retorna una vista inmutable para evitar modificaciones externas
+        // Los cambios deben hacerse a traves de agregarItem() y limpiar()
         return Collections.unmodifiableList(items);
     }
 }
