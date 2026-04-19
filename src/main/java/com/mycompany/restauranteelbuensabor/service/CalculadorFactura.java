@@ -8,11 +8,7 @@ import com.mycompany.restauranteelbuensabor.model.Datos;
 
 public class CalculadorFactura {
 
-    private static final double TASA_IVA = 0.19;
-    private static final double TASA_PROPINA = 0.10;
-    private static final double TASA_DESCUENTO = 0.05;
-    private static final double UMBRAL_PROPINA = 50000;
-    private static final int MIN_ITEMS_DESCUENTO = 3;
+
 
     public static double calcularTotalFactura() {
         double subtotal = calcularSubtotal();
@@ -38,8 +34,8 @@ public class CalculadorFactura {
 
     public static double aplicarDescuento(double subtotal) {
         int cantidadProductos = contadorProductosPedidos();
-        if (cantidadProductos > MIN_ITEMS_DESCUENTO && subtotal > 0) {
-            return subtotal - (subtotal * TASA_DESCUENTO);
+        if (cantidadProductos > Datos.MIN_ITEMS_DESCUENTO && subtotal > 0) {
+            return subtotal - (subtotal * Datos.TASA_DESCUENTO);
         }
 
         return 0;
@@ -57,12 +53,12 @@ public class CalculadorFactura {
     }
 
     public static double calcularIVA(double base) {
-        return base * TASA_IVA;
+        return base * Datos.TASA_IVA;
     }
 
     public static double calcularPropina(double base) {
-        if (base > UMBRAL_PROPINA) {
-            return base + (base * TASA_PROPINA);
+        if (base > Datos.UMBRAL_PROPINA) {
+            return base + (base * Datos.TASA_PROPINA);
         }
         return base;
     }
