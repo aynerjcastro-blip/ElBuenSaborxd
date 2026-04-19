@@ -5,7 +5,7 @@
 package com.mycompany.restauranteelbuensabor.view;
 
 import com.mycompany.restauranteelbuensabor.model.Datos;
-import com.mycompany.restauranteelbuensabor.service.CalculadorFactura;
+
 
 public class Imprimir {
     private static final String NOMBRE_RESTAURANTE = "EL BUEN SABOR";
@@ -51,33 +51,4 @@ public class Imprimir {
         System.out.println(SEPARADOR_SIMPLE);
         System.out.printf("%-27s $%,.0f%n", "Subtotal:", subtotal);
     }
-
-    private static void imprimirItemsPedido() {
-        int indice = 0;
-        while (indice < Datos.nombres.length) {
-            if (Datos.cantidades[indice] > 0) {
-                System.out.printf("%-20s x%-6d $%,.0f%n",
-                        Datos.nombres[indice],
-                        Datos.cantidades[indice],
-                        Datos.precios[indice] * Datos.cantidades[indice]);
-            }
-            indice++;
-        }
-    }
-
-    private static void imprimirTotales(double subtotalConDescuento, double iva, double propina, double total) {
-        System.out.println(SEPARADOR_SIMPLE);
-        System.out.printf("%-27s $%,.0f%n", "Subtotal:", subtotalConDescuento);
-        System.out.printf("%-27s $%,.0f%n", "IVA (19%):", iva);
-        if (propina > 0) {
-            System.out.printf("%-27s $%,.0f%n", "Propina (10%):", propina);
-        }
-        System.out.println(SEPARADOR_SIMPLE);
-        System.out.printf("%-27s $%,.0f%n", "TOTAL:", total);
-        System.out.println(SEPARADOR_DOBLE);
-    }
-
-    
-
-
 }
