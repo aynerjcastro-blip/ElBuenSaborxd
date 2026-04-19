@@ -15,18 +15,14 @@ public class Utilidades {
 
         double subtotal = precioUnitario * cantidad;
 
-        if (porcentajeDescuento > 0) {
+        if(porcentajeDescuento > 0){
             subtotal = subtotal - (subtotal * porcentajeDescuento);
         }
-
-        double iva = subtotal * porcentajeIva;
-        subtotal = subtotal + iva;
-
-        if (aplicarPropina) {
+        subtotal = subtotal + (subtotal * porcentajeIva);
+        if(aplicarPropina){
             subtotal = subtotal + (subtotal * porcentajePropina);
         }
 
-        System.out.println("RESTAURANTE EL BUEN SABOR - calculo aplicado");
         return subtotal;
     }
 
@@ -35,7 +31,7 @@ public class Utilidades {
         int indice = 0;
         while (indice < Datos.cantidades.length) {
             if (Datos.cantidades[indice] > 0) {
-                cantidadProductos = cantidadProductos + 1;
+                cantidadProductos++;
             }
             indice++;
         }
