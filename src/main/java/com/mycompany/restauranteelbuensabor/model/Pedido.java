@@ -24,7 +24,16 @@ public class Pedido {
         return total;
     }
 
-    public int contarItemsDiferentes(){
+    public int contarItemsDiferentes() {
         return items.size();
     }
-}  
+
+    public boolean tieneProductos() {
+        return !items.isEmpty();
+    }
+
+    public void limpiar() {
+        items.clear();
+    }
+
+}
