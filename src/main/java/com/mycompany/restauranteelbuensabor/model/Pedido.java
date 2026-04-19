@@ -1,6 +1,7 @@
 package com.mycompany.restauranteelbuensabor.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Pedido {
@@ -36,4 +37,7 @@ public class Pedido {
         items.clear();
     }
 
+    public List<ItemPedido> getItems() {
+        return Collections.unmodifiableList(items);
+    }
 }
