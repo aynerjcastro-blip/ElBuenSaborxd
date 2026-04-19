@@ -8,17 +8,15 @@ import com.mycompany.restauranteelbuensabor.model.Producto;
 
 public class Imprimir {
 
-    private static final String NOMBRE_RESTAURANTE = "EL BUEN SABOR";
-    private static final String DIRECCION = "Calle 15 #8-32, Valledupar";
-    private static final String NIT = "900.123.456-7";
-    private static final String SEPARADOR_DOBLE = "========================================";
+
+    private static final String SEPARADOR_DOBLE  = "========================================";
     private static final String SEPARADOR_SIMPLE = "----------------------------------------";
 
     public static void imprimirEncabezado() {
         System.out.println(SEPARADOR_DOBLE);
-        System.out.println("    RESTAURANTE " + NOMBRE_RESTAURANTE);
-        System.out.println("    " + DIRECCION);
-        System.out.println("    NIT: " + NIT);
+        System.out.println("    RESTAURANTE " + Carta.NOMBRE_RESTAURANTE);
+        System.out.println("    " + Carta.DIRECCION);
+        System.out.println("    NIT: " + Carta.NIT);
         System.out.println(SEPARADOR_DOBLE);
     }
 
@@ -76,7 +74,7 @@ public class Imprimir {
         imprimirItemsPedido(factura.getPedido());
         imprimirTotales(factura);
         System.out.println("Gracias por su visita!");
-        System.out.println(NOMBRE_RESTAURANTE + " - Valledupar");
+        System.out.println(Carta.NOMBRE_RESTAURANTE + " - Valledupar");
         System.out.println(SEPARADOR_DOBLE);
     }
 

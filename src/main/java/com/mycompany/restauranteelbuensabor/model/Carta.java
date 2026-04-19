@@ -3,6 +3,11 @@ package com.mycompany.restauranteelbuensabor.model;
 import java.util.List;
 
 public class Carta {
+
+    public static final String NOMBRE_RESTAURANTE = "EL BUEN SABOR";
+    public static final String DIRECCION = "Calle 15 #8-32, Valledupar";
+    public static final String NIT = "900.123.456-7";
+
     private static final List<Producto> productos = List.of(
             new Producto("Bandeja Paisa", 32000),
             new Producto("Sancocho de Gallina", 28000),
