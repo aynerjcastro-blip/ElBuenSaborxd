@@ -1,66 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.restauranteelbuensabor.service;
 
-import com.mycompany.restauranteelbuensabor.model.Datos;
+import com.mycompany.restauranteelbuensabor.model.Factura;
+import com.mycompany.restauranteelbuensabor.model.Pedido;
+import com.mycompany.restauranteelbuensabor.model.ReglasNegocio;
 
 public class CalculadorFactura {
 
-
-
-    public static double calcularTotalFactura() {
-        double subtotal = calcularSubtotal();
-        double subtotalConDescuento = aplicarDescuento(subtotal);
-        double iva = calcularIVA(subtotalConDescuento);
-        double total = calcularPropina(subtotalConDescuento + iva);
-        Datos.estado = 1;// estado de factura generada
-        Datos.total = total;
-        return total;
+    public static Factura generarFactura(Pedido pedido, int numeroFactura) {
+        double subtotal  = pedido.calcularSubTotal();
+        double descuento = calcularDescuento(subtotal, pedido.contarItemsDiferentes());
+        double iva       = calcularIVA(subtotal - descuento);
+        double total     = calcularTotal((subtotal - descuento) + iva);
+        return new Factura(pedido, numeroFactura, subtotal, descuento, iva, total);
     }
 
-    public static double calcularSubtotal() {
-        double subtotal = 0;
-        int indice = 0;
-        while (indice < Datos.cantidades.length) {
-            if (Datos.cantidades[indice] > 0) {
-                subtotal = subtotal + Datos.precios[indice] * Datos.cantidades[indice];
-            }
-            indice++;
+    private static double calcularDescuento(double subtotal, int itemsDiferentes) {
+        if (itemsDiferentes > ReglasNegocio.MIN_ITEMS_DESCUENTO) {
+            return subtotal * ReglasNegocio.TASA_DESCUENTO;
         }
-        return subtotal;
-    }
-
-    public static double aplicarDescuento(double subtotal) {
-        int cantidadProductos = contadorProductosPedidos();
-        if (cantidadProductos > Datos.MIN_ITEMS_DESCUENTO && subtotal > 0) {
-            return subtotal - (subtotal * Datos.TASA_DESCUENTO);
-        }
-
         return 0;
     }
 
-    public static int contadorProductosPedidos() {
-        int cantidadProductos = 0;
-        for (int i = 0; i < Datos.cantidades.length; i++) {
-            if (Datos.cantidades[i] > 0) {
-                cantidadProductos++;
-            }
-        }
-        return cantidadProductos;
-
+    private static double calcularIVA(double base) {
+        return base * ReglasNegocio.TASA_IVA;
     }
 
-    public static double calcularIVA(double base) {
-        return base * Datos.TASA_IVA;
-    }
-
-    public static double calcularPropina(double base) {
-        if (base > Datos.UMBRAL_PROPINA) {
-            return base + (base * Datos.TASA_PROPINA);
+    private static double calcularTotal(double base) {
+        if (base > ReglasNegocio.UMBRAL_PROPINA) {
+            return base + (base * ReglasNegocio.TASA_PROPINA);
         }
         return base;
     }
-
+    
 }
