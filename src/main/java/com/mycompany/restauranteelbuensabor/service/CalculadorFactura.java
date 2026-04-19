@@ -17,8 +17,8 @@ public class CalculadorFactura {
     public static double calcularTotalFactura() {
         double subtotal = calcularSubtotal();
         double subtotalConDescuento = aplicarDescuento(subtotal);
-        double total = 0;
-        double iva;
+        double iva = calcularIVA(subtotalConDescuento);
+        double total = calcularPropina(subtotalConDescuento + iva);
         Datos.estado = 1;// estado de factura generada
         Datos.total = total;
         return total;
@@ -36,7 +36,7 @@ public class CalculadorFactura {
         return subtotal;
     }
 
-    public static double aplicarDescuento (double subtotal) {
+    public static double aplicarDescuento(double subtotal) {
         int cantidadProductos = contadorProductosPedidos();
         if (cantidadProductos > MIN_ITEMS_DESCUENTO && subtotal > 0) {
             return subtotal - (subtotal * TASA_DESCUENTO);
@@ -54,6 +54,17 @@ public class CalculadorFactura {
         }
         return cantidadProductos;
 
+    }
+
+    public static double calcularIVA(double base) {
+        return base * TASA_IVA;
+    }
+
+    public static double calcularPropina(double base) {
+        if (base > UMBRAL_PROPINA) {
+            return base + (base * TASA_PROPINA);
+        }
+        return base;
     }
 
 }
