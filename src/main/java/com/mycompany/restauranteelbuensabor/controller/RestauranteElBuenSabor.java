@@ -1,4 +1,3 @@
-
 package com.mycompany.restauranteelbuensabor.controller;
 
 import com.mycompany.restauranteelbuensabor.view.Imprimir;
@@ -6,15 +5,11 @@ import com.mycompany.restauranteelbuensabor.model.Carta;
 import com.mycompany.restauranteelbuensabor.model.Factura;
 import com.mycompany.restauranteelbuensabor.model.Mesa;
 import com.mycompany.restauranteelbuensabor.model.Pedido;
-import com.mycompany.restauranteelbuensabor.model.ReglasNegocio;
 import com.mycompany.restauranteelbuensabor.service.CalculadorFactura;
 import java.util.Scanner;
 
-/**
- *
- * @author alfre
- */
 public class RestauranteElBuenSabor {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Pedido pedido = new Pedido();
@@ -23,7 +18,9 @@ public class RestauranteElBuenSabor {
         int opcionMenu = 0;
         boolean continuarEjecutando = true;
         int intentosInvalidos = 0;
+
         Imprimir.imprimirEncabezado();
+
         while (continuarEjecutando) {
             System.out.println("1. Ver carta");
             System.out.println("2. Agregar producto al pedido");
@@ -33,7 +30,7 @@ public class RestauranteElBuenSabor {
             System.out.println("0. Salir");
             System.out.println("========================================");
             System.out.print("Seleccione una opcion: ");
-            opcionMenu = sc.nextInt();
+            opcionMenu = Integer.parseInt(sc.nextLine());
 
             switch (opcionMenu) {
                 case 1:
@@ -44,16 +41,15 @@ public class RestauranteElBuenSabor {
                 case 2:
                     System.out.println("--- AGREGAR PRODUCTO ---");
                     System.out.print("Numero de producto (1-" + Carta.getTotalProductos() + "): ");
-                    int numeroProducto = Integer.parseInt(sc.next());
-
+                    int numeroProducto = Integer.parseInt(sc.nextLine());
                     System.out.print("Cantidad: ");
-                    int cantidad = Integer.parseInt(sc.next());
+                    int cantidad = Integer.parseInt(sc.nextLine());
 
                     if (numeroProducto > 0 && numeroProducto <= Carta.getTotalProductos()) {
                         if (cantidad > 0) {
                             if (!mesa.estaActiva()) {
                                 System.out.print("Ingrese numero de mesa: ");
-                                int numeroMesa = Integer.parseInt(sc.next());
+                                int numeroMesa = Integer.parseInt(sc.nextLine());
                                 mesa.activar(numeroMesa <= 0 ? 1 : numeroMesa);
                             }
                             pedido.agregarItem(Carta.getProducto(numeroProducto - 1), cantidad);
@@ -74,20 +70,43 @@ public class RestauranteElBuenSabor {
                     break;
 
                 case 3:
-
-
+                    System.out.println();
+                    if (pedido.tieneProductos()) {
+                        Imprimir.mostrarPedido(pedido);
+                    } else {
+                        System.out.println("No hay productos en el pedido actual.");
+                        System.out.println("Use la opcion 2 para agregar productos.");
+                    }
+                    System.out.println();
                     break;
 
                 case 4:
-
+                    System.out.println();
+                    if (pedido.tieneProductos()) {
+                        Factura factura = CalculadorFactura.generarFactura(pedido, numeroFactura);
+                        Imprimir.imprimirFacturaCompleta(factura);
+                        numeroFactura++;
+                        pedido.limpiar();
+                        mesa.reiniciar();
+                        System.out.println();
+                    } else {
+                        System.out.println("No se puede generar factura.");
+                        System.out.println("No hay productos en el pedido.");
+                        System.out.println("Use la opcion 2 para agregar productos primero.");
+                    }
                     break;
 
                 case 5:
-
+                    System.out.println();
+                    pedido.limpiar();
+                    mesa.reiniciar();
+                    System.out.println("Mesa reiniciada. Lista para nuevo cliente.");
+                    System.out.println();
                     break;
 
                 case 0:
-
+                    continuarEjecutando = false;
+                    System.out.println("Hasta luego!");
                     break;
 
                 default:
@@ -101,5 +120,5 @@ public class RestauranteElBuenSabor {
             }
         }
         sc.close();
-    }// fin main
+    }
 }
