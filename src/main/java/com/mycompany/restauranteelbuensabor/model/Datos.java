@@ -16,7 +16,7 @@ public class Datos {
     public static int numeroMesaActual = 0;
     public static int estado = 0;
     public static double total = 0;
-    public static int numeroFactura = 1;
+    public static int numeroFacturas = 1;
     public static String x = "El Buen Sabor";
     public static String temporal = "";
 }
