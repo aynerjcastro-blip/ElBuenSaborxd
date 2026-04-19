@@ -16,4 +16,15 @@ public class Pedido {
         items.add(new ItemPedido(producto, cantidad));
     }
 
-}
+    public double calcularSubTotal() {
+        double total = 0;
+        for (ItemPedido item : items) {
+            total += item.calcularSubtotal();
+        }
+        return total;
+    }
+
+    public int contarItemsDiferentes(){
+        return items.size();
+    }
+}  
