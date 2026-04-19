@@ -12,7 +12,20 @@ public class Producto {
     public String getNombre() {
         return nombre;
     }
+
     public double getPrecio() {
         return precio;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Producto)) {
+            return false;
+        }
+        Producto otroProducto = (Producto) obj;
+        return this.nombre.equals(otroProducto.nombre);
     }
 }
