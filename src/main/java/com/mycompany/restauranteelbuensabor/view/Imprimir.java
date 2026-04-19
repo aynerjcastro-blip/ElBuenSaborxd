@@ -5,6 +5,7 @@
 package com.mycompany.restauranteelbuensabor.view;
 
 import com.mycompany.restauranteelbuensabor.model.Datos;
+import com.mycompany.restauranteelbuensabor.service.CalculadorFactura;
 
 public class Imprimir {
     private static final String NOMBRE_RESTAURANTE = "EL BUEN SABOR";
@@ -75,5 +76,8 @@ public class Imprimir {
         System.out.printf("%-27s $%,.0f%n", "TOTAL:", total);
         System.out.println(SEPARADOR_DOBLE);
     }
+
+    
+
 
 }
